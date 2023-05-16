@@ -9,12 +9,9 @@ from transformers import BertTokenizer, BertModel, BertForSequenceClassification
 from my_model import LIABertClassifier
 app = Flask(__name__)
 
-PATH = 'https://github.com/wrodrigohs/techrere/releases/download/model.pth/model.pth'
-state_dict = torch.hub.load_state_dict_from_url(PATH, map_location=torch.device('cpu'))
-
 model = BertModel.from_pretrained("bert-base-multilingual-cased")
 model = LIABertClassifier(model, 3)
-model.load_state_dict(state_dict)
+model.load_state_dict(torch.load('https://github.com/wrodrigohs/techrere/releases/download/model.pth/model.pth', map_location=torch.device('cpu')))
 # Carregando os parâmetros do modelo
 # parameters = torch.load('model.pth', map_location=torch.device('cpu'))
 
@@ -62,25 +59,25 @@ def predict():
 
     # output = prediction[0]
 
-    # graphJSON = plot()
+    graphJSON = plot()
 
     return render_template('index.html', 
                           #  graphJSON=graphJSON,
                            prediction_text='{}'.format(resultado))
-# def plot():
-#   import plotly.io as pio
-#   pio.renderers.default = "iframe"
-#   df = pd.DataFrame({
-#       'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 
-#       'Bananas'],
-#       'Amount': [4, 1, 2, 2, 4, 5],
-#       'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
-#     })
-#   fig = px.bar(df, x='Fruit', y='Amount', color='City', 
-#     barmode='group')
-#   fig.write_html("file.html", full_html=False, include_plotlyjs= False)
-#   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-#   return graphJSON
+def plot():
+  import plotly.io as pio
+  pio.renderers.default = "iframe"
+  df = pd.DataFrame({
+      'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 
+      'Bananas'],
+      'Amount': [4, 1, 2, 2, 4, 5],
+      'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
+    })
+  fig = px.bar(df, x='Fruit', y='Amount', color='City', 
+    barmode='group')
+  fig.write_html("file.html", full_html=False, include_plotlyjs= False)
+  graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+  return graphJSON
 
 if __name__ == "__main__":
     app.run(debug=True)

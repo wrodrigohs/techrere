@@ -10,11 +10,9 @@ from my_model import LIABertClassifier
 app = Flask(__name__)
 
 PATH = 'https://github.com/wrodrigohs/techrere/releases/download/model.pth/model.pth'
-state_dict = torch.hub.load_state_dict_from_url(PATH, map_location=torch.device('cpu'))
-
 model = BertModel.from_pretrained("bert-base-multilingual-cased")
 model = LIABertClassifier(model, 3)
-model.load_state_dict(state_dict)
+model.load_state_dict(torch.load(PATH, map_location=torch.device('cpu')))
 # Carregando os parâmetros do modelo
 # parameters = torch.load('model.pth', map_location=torch.device('cpu'))
 
