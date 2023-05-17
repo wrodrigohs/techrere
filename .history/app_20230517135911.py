@@ -5,7 +5,6 @@ import plotly_express as px
 import json
 import plotly
 import json
-from datetime import datetime, timedelta
 import torch
 import torch.nn as nn
 from transformers import BertTokenizer, BertModel, BertForSequenceClassification
@@ -56,11 +55,10 @@ def predict():
     # graph1JSON = plot()
     fig = plot()
     graph1JSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    diff_date = datetime.now() - timedelta(days=7) 
+
     return render_template('index.html', 
                           graph1JSON=graph1JSON,
-                          prediction_text='{}'.format(resultado),
-                          diff_date = diff_date)
+                           prediction_text='{}'.format(resultado))
 
 def plot():
   # Graph One

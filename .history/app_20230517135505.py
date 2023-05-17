@@ -5,7 +5,6 @@ import plotly_express as px
 import json
 import plotly
 import json
-from datetime import datetime, timedelta
 import torch
 import torch.nn as nn
 from transformers import BertTokenizer, BertModel, BertForSequenceClassification
@@ -37,7 +36,7 @@ def predict():
     
     token=tokenizer(noticia, return_tensors='pt')
     out=model(input_ids=token['input_ids'])
-    # print('\n\n{}\n\n'.format(out))
+    print('\n\n{}\n\n'.format(out))
     # logits = out.logits
     # output = torch.argmax(logits, dim=-1).item()
 
@@ -54,19 +53,28 @@ def predict():
     # output = prediction[0]
 
     # graph1JSON = plot()
-    fig = plot()
-    graph1JSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    diff_date = datetime.now() - timedelta(days=7) 
-    return render_template('index.html', 
-                          graph1JSON=graph1JSON,
-                          prediction_text='{}'.format(resultado),
-                          diff_date = diff_date)
-
-def plot():
-  # Graph One
+    # Graph One
     df = px.data.medals_wide()
     fig1 = px.bar(df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
-    return fig1
+    graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('index.html', 
+                          #  graphJSON=graphJSON,
+                           prediction_text='{}'.format(resultado))
+# def plot():
+#   import plotly.io as pio
+#   pio.renderers.default = "iframe"
+#   df = pd.DataFrame({
+#       'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges', 
+#       'Bananas'],
+#       'Amount': [4, 1, 2, 2, 4, 5],
+#       'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
+#     })
+#   fig = px.bar(df, x='Fruit', y='Amount', color='City', 
+#     barmode='group')
+#   fig.write_html("file.html", full_html=False, include_plotlyjs= False)
+#   graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+#   return graphJSON
 
 if __name__ == "__main__":
     app.run(debug=True)

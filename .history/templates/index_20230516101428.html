@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
 <head>
   <meta charset="UTF-8">
   <title>ML API</title>
@@ -7,8 +8,15 @@
   <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+  <!-- <script>
+    function postYourAdd () {
+    var iframe = $("#forPostyouradd");
+    iframe.attr("src", iframe.data("src")); 
+    }
+  </script> -->
 </head>
 
 <body>
@@ -25,26 +33,24 @@
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
 
+    <!-- <button id="postYourAdd" onclick="postYourAdd()">OPEN</button> -->
     <br/>
+    <!-- <iframe id="forPostyouradd" data-src="./figure.html" src="./figure.html" width="500" height="200" style="background:#ffffff"></iframe> -->
+
+    <!-- <div id="7979e646-13e6-4f44-8d32-d8effc3816df" style="height: 525; width: 100%;" class="plotly-graph-div"></div><script type="text/javascript">window.PLOTLYENV=window.PLOTLYENV || {};window.PLOTLYENV.BASE_URL="https://plot.ly";Plotly.newPlot("7979e646-13e6-4f44-8d32-d8effc3816df", [{"x": [0, 0, 8], "y": [3, 1, 6]}], {}, {"showLink": false, "linkText": ""})</script> -->
+
    <br>
    <br>
    {{ prediction_text }}
-   {{ diff_date }}
     <br/>
   
-    <div id="chart1"></div>
-
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script type="text/javascript">
-        var graphs1 = {{ graph1JSON | safe}};
-        Plotly.plot("chart1", graphs1,{});
-
-        // var graphs2 = {{ graph2JSON | safe}};
-        // Plotly.plot("chart2", graphs2,{});
-
-        // var graphs3 = {{ graph3JSON | safe}};
-        // Plotly.plot("chart3", graphs3,{});
-    </script>
+    <!-- <div class="container-fluid" style="margin-top:40px">
+      <iframe src="https://github.com/wrodrigohs/deploy-ds-model/blob/master/file.html" width="800" height="1200" frameBorder="0"></iframe>
+    </div> -->
+    <!-- <script type='text/javascript'>
+      var graphs = {graphJSON, safe};
+      Plotly.plot('chart',graphs,{});
+    </script> -->
  </div>
 </body>
 </html>

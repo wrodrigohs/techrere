@@ -57,6 +57,7 @@ def predict():
     fig = plot()
     graph1JSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     diff_date = datetime.now() - timedelta(days=7) 
+    print(diff_date)
     return render_template('index.html', 
                           graph1JSON=graph1JSON,
                           prediction_text='{}'.format(resultado),
