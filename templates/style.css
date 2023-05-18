@@ -1,0 +1,20 @@
+:root{
+    --azul:#18ADE0;
+    --ciano-claro: #51B797;
+    --ciano-escuro: #229679;
+    --marrom: #685C4A;
+    --preto: #293237;
+}
+.container{
+    text-align: center;
+    align-items: center;
+}
+.container input{
+    border-color: #229679 !important;
+    color: var(--preto) !important;
+}
+.container button{
+    border-color: #229679 !important;
+    background-color: var(--ciano-claro) !important;
+    color: var(--preto) !important; 
+}
