@@ -1,0 +1,38 @@
+:root {
+  --azul: #18ade0;
+  --ciano-claro: #51b797;
+  --ciano-escuro: #229679;
+  --marrom: #685c4a;
+  --preto: #293237;
+}
+
+.container {
+  text-align: center;
+  align-items: center;
+}
+
+.container input {
+  border-color: #229679 !important;
+  color: var(--preto) !important;
+}
+
+.container button {
+  border-color: #229679 !important;
+  background-color: var(--ciano-claro) !important;
+  color: var(--preto) !important;
+}
+
+#logo-pantanal {
+  height: 50px;
+  width: auto;
+}
+
+input {
+  max-width: 50%;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

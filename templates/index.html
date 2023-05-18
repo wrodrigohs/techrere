@@ -1,52 +1,88 @@
 <!DOCTYPE html>
-<html >
-<head>
-  <meta charset="UTF-8">
-  <title>TechReré</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TechReré</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arimo"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Hind:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="assets/styles/style.css" />
+  </head>
 
-</head>
-
-<body>
- <div class="container">
-	<h1>Techreré - Pantanal.dev</h1>
-  <br/>
-  <h4>Predição de sentimentos de notícias e sua relação com preços de ações</h4>
-  <br/>
-
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="POST">
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Insira aqui o nome da ação" aria-label="Insira aqui o nome da ação" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-          <button class="btn btn-outline-info" type="submit">Buscar</button>
-        </div>
+  <body>
+    <nav class="navbar bg-body-secondary mb-5">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img
+            src="assets/images/logo-pantanal.png"
+            alt="Pantanal.dev"
+            id="logo-pantanal"
+          />
+        </a>
       </div>
-    	<!-- <input type="text" name="text_pt" placeholder="Insira aqui o nome da ação" required="required" /> -->
-      <!-- <input type="text" name="test_score" placeholder="Test Score" required="required" /> -->
-		  <!-- <input type="text" name="interview_score" placeholder="Interview Score" required="required" /> -->
+    </nav>
+    <div class="container">
+      <h1>Techreré - Pantanal.dev</h1>
+      <br />
+      <h4>
+        Predição de sentimentos de notícias e sua relação com preços de ações
+      </h4>
+      <br />
 
-        <!-- <button type="submit" class="btn-predict">Buscar</button> -->
-    </form>
+      <!-- Main Input For Receiving Query to our ML -->
+      <form action="{{ url_for('predict')}}" method="POST">
+        <div class="input-group mb-3 justify-content-center">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Insira aqui o nome da ação"
+            aria-label="Insira aqui o nome da ação"
+            aria-describedby="basic-addon2"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-outline-info" type="submit">Buscar</button>
+          </div>
+        </div>
+      </form>
+      <br />
+      <br />
+      <br />
+      {{ prediction_text }} {{ diff_date }}
+      <br />
 
-    <br/>
-   <br>
-   <br>
-   {{ prediction_text }}
-   {{ diff_date }}
-    <br/>
-  
-    <div id="chart1"></div>
+      <div id="chart1"></div>
 
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script type="text/javascript">
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"
+      ></script>
+      <script type="text/javascript">
         var graphs1 = {{ graph1JSON | safe}};
         Plotly.plot("chart1", graphs1,{});
 
@@ -55,7 +91,13 @@
 
         // var graphs3 = {{ graph3JSON | safe}};
         // Plotly.plot("chart3", graphs3,{});
-    </script>
- </div>
-</body>
+      </script>
+    </div>
+    <footer class="d-flex justify-content-center bg-body-secondary" id="footer">
+      <span class="fw-bold">
+        <img src="assets/images/icon-terere.png" alt="tereré" />
+        TechReré
+      </span>
+    </footer>
+  </body>
 </html>
