@@ -68,7 +68,7 @@ def get_noticia():
     # return rows
 
 def plot(noticia):
-    df = get_noticia()
+    df_noticias = get_noticia()
     print('\n\n')
     print(df)
     print('\n\n')
