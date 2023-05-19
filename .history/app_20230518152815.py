@@ -62,16 +62,12 @@ def get_noticia():
     conn = psycopg2.connect(host="localhost", 
       database="techrere", user="postgres", password="root")
     cur = conn.cursor()
-    cur.execute("SELECT classe FROM noticias")
-    df = cur.fetchall()
-    return df
+    cur.execute("SELECT * FROM empresa")
+    rows = cur.fetchall()
+    print(rows)
     # return rows
 
 def plot(noticia):
-    df = get_noticia()
-    print('\n\n')
-    print(df)
-    print('\n\n')
     # if (noticia.lower() == 'itub3'):
     #   df_acao = pd.read_csv('https://raw.githubusercontent.com/wrodrigohs/techrere/main/itub3.csv')
     # elif (noticia.lower() == 'itub4'):

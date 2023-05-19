@@ -41,7 +41,7 @@ def predict():
     noticia = request.form['noticia']
     fig1, fig2 = plot(noticia)
     
-    token=tokenizer(noticia, return_tensors='pt')
+    token=tokenizer(str(noticia), return_tensors='pt')
     out=model(input_ids=token['input_ids'])
     output = torch.argmax(out, dim=-1)[0].cpu().item()
     if output == 0:
@@ -52,26 +52,23 @@ def predict():
       resultado = 'neutro'
 
     graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-    # diff_date = datetime.now() - timedelta(days=7) 
+    diff_date = datetime.now() - timedelta(days=7) 
     return render_template('index.html', 
                           graph1JSON=graph1JSON,
                           prediction_text='{}'.format(resultado),
-                          noticia = noticia)
+                          noticia = noticia,
+                          diff_date = diff_date)
 
 def get_noticia():
     conn = psycopg2.connect(host="localhost", 
       database="techrere", user="postgres", password="root")
     cur = conn.cursor()
-    cur.execute("SELECT classe FROM noticias")
-    df = cur.fetchall()
-    return df
+    cur.execute("SELECT * FROM empresa")
+    rows = cur.fetchall()
+    print(rows)
     # return rows
 
 def plot(noticia):
-    df = get_noticia()
-    print('\n\n')
-    print(df)
-    print('\n\n')
     # if (noticia.lower() == 'itub3'):
     #   df_acao = pd.read_csv('https://raw.githubusercontent.com/wrodrigohs/techrere/main/itub3.csv')
     # elif (noticia.lower() == 'itub4'):
