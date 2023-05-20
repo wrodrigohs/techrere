@@ -18,7 +18,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 import psycopg2.extras as extras
 from psycopg2 import sql
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/templates/assets/static')
 
 PATH = 'https://github.com/wrodrigohs/deploy-ds-model/releases/download/model/model.pth'
 state_dict = torch.hub.load_state_dict_from_url(PATH, map_location=torch.device('cpu'))
@@ -32,12 +32,12 @@ model.eval()
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 
-@app.route('/api')
-def api():
-    return render_template('index.html')
-
 @app.route('/')
 def home():
+    return render_template('index.html')
+
+@app.route('/noticias')
+def noticias():
     return render_template('api.html')
 
 @app.route('/predictNews',methods=['POST'])
