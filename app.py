@@ -36,6 +36,10 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 def home():
     return render_template('index.html')
 
+@app.route('/api')
+def home():
+    return render_template('api.html')
+
 @app.route('/predictnews',methods=['POST'])
 def predictNews():
     '''
@@ -53,7 +57,7 @@ def predictNews():
     # else:
     #   resultado = 'neutro'
     
-    return render_template('index.html', 
+    return render_template('api.html', 
                           )
 
 @app.route('/predict',methods=['POST'])
