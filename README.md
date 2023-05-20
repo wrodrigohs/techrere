@@ -10,7 +10,7 @@ Certifique-se de ter todas as dependências instaladas antes de executar o proje
 
 
 ```
-pip install numpy flask pandas plotly_express torch transformers psycopg2
+comando pip install -r requirements.txt
 ```
 
 
