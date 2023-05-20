@@ -32,53 +32,41 @@ model.eval()
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 
-@app.route('/')
-def home():
+@app.route('/api')
+def api():
     return render_template('index.html')
 
-@app.route('/api')
+@app.route('/')
 def home():
     return render_template('api.html')
 
-@app.route('/predictnews',methods=['POST'])
+@app.route('/predictNews',methods=['POST'])
 def predictNews():
     '''
     For rendering results on HTML GUI
     '''
-    # news = request.form['news']
-    
-    # token=tokenizer(news, return_tensors='pt')
-    # out=model(input_ids=token['input_ids'])
-    # output = torch.argmax(out, dim=-1)[0].cpu().item()
-    # if output == 0:
-    #   resultado = 'negativo'
-    # elif output == 1:
-    #   resultado = 'positivo'
-    # else:
-    #   resultado = 'neutro'
+    news = request.form['news']
+    token=tokenizer(news, return_tensors='pt')
+    out=model(input_ids=token['input_ids'])
+    output = torch.argmax(out, dim=-1)[0].cpu().item()
+    if output == 0:
+      resultado = 'negativa'
+    elif output == 1:
+      resultado = 'positiva'
+    else:
+      resultado = 'neutra'
     
     return render_template('api.html', 
-                          )
+      prediction_text='A notícia foi classificada como {}'.format(resultado))
 
 @app.route('/predict',methods=['POST'])
 def predict():
     '''
     For rendering results on HTML GUI
     '''
-    # stock = request.form['acao']
     stock = request.form.get('acao')
 
     fig1 = plot(stock)
-    
-    token=tokenizer(stock, return_tensors='pt')
-    out=model(input_ids=token['input_ids'])
-    output = torch.argmax(out, dim=-1)[0].cpu().item()
-    if output == 0:
-      resultado = 'negativo'
-    elif output == 1:
-      resultado = 'positivo'
-    else:
-      resultado = 'neutro'
 
     graph1JSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
     
@@ -159,7 +147,7 @@ def plot(stock):
         y=df_grouped['noticias_negativas'],
         mode='lines+markers',
         name='Notícias negativas',
-        marker=dict(color="#293237"),
+        marker=dict(color="#FF1610"),
         showlegend=True
     ))
 
@@ -178,7 +166,7 @@ def plot(stock):
         x=df_grouped['data_noticia'],
         y=df_grouped['noticias_neutras'],
         mode='lines+markers',
-        marker=dict(color="#229679"),
+        marker=dict(color="#EBCBFF"),
         name='Notícias neutras',
         showlegend=True
     ))

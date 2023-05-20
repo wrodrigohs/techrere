@@ -29,20 +29,20 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="/templates/assets/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/assets/styles/style.css') }}" />
   </head>
   <body>
     <nav class="navbar bg-body-secondary mb-5">
       <div class="container">
         <a class="navbar-brand" href="#">
           <img
-            src="D:\\UFMS\\Pantanal.dev\\techrere\\templates\\assets\\images\\logo-pantanal.png"
+            src="{{ url_for('static', filename='/assets/images/logo-pantanal.png') }}"
             alt="Pantanal.dev"
             id="logo-pantanal"
           />
         </a>
-        <a class="btn btn-outline-primary" type="button" href="/api">
-          Ir para o classificador
+        <a class="btn btn-outline-primary" type="button" href="/">
+          Ir para o classificador de notícia
         </a>
       </div>
     </nav>
@@ -74,7 +74,7 @@
     <footer
       class="d-flex justify-content-center align-items-center bg-body-secondary"
     >
-      <img src="/templates/assets/images/icon-terere.png" alt="tereré" id="icon-terere" />
+      <img src="{{ url_for('static', filename='../templates/assets/images/icon-terere.png') }}" alt="tereré" id="icon-terere" />
       <span class="fw-bold ms-2">TechReré</span>
     </footer>
 
