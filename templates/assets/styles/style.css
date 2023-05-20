@@ -11,9 +11,10 @@
   align-items: center;
 }
 
-.container input {
+.container select {
   border-color: #229679 !important;
   color: var(--preto) !important;
+  max-width: 40%;
 }
 
 .container button {
@@ -27,12 +28,14 @@
   width: auto;
 }
 
-input {
-  max-width: 50%;
-}
-
-#footer {
+footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+  height: 8vh;
+}
+
+#icon-terere {
+  height: 20px;
+  width: auto;
 }
