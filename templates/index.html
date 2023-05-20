@@ -31,7 +31,6 @@
     />
     <link rel="stylesheet" type="text/css" href="assets/styles/style.css" />
   </head>
-
   <body>
     <nav class="navbar bg-body-secondary mb-5">
       <div class="container">
@@ -45,24 +44,20 @@
       </div>
     </nav>
     <div class="container">
-      <h1>Techreré - Pantanal.dev</h1>
+      <h1>TechReré - Pantanal.dev</h1>
       <br />
       <h4>
         Predição de sentimentos de notícias e sua relação com preços de ações
       </h4>
       <br />
-
       <!-- Main Input For Receiving Query to our ML -->
       <form action="{{ url_for('predict')}}" method="POST">
         <div class="input-group mb-3 justify-content-center">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Insira aqui o nome da ação"
-            aria-label="Insira aqui o nome da ação"
-            aria-describedby="basic-addon2"
-            name="noticia" 
-          />
+          <select class="form-select" aria-label="Ação" name="acao">
+            <option selected>Selecione a ação</option>
+            <option value="petrobras">Petrobrás</option>
+            <option value="itau">Itaú</option>
+          </select>
           <div class="input-group-append">
             <button class="btn btn-outline-info" type="submit">Buscar</button>
           </div>
@@ -71,32 +66,25 @@
       <br />
       {{ prediction_text }}
       <br />
-
       <div id="chart1"></div>
-
-      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"
-      ></script>
-      <script type="text/javascript">
-        var graphs1 = {{ graph1JSON | safe}};
-        Plotly.plot("chart1", graphs1,{});
-
-        // var graphs2 = {{ graph2JSON | safe}};
-        // Plotly.plot("chart2", graphs2,{});
-
-        // var graphs3 = {{ graph3JSON | safe}};
-        // Plotly.plot("chart3", graphs3,{});
-      </script>
     </div>
-    <footer class="d-flex justify-content-center bg-body-secondary" id="footer">
-      <span class="fw-bold">
-        <img src="assets/images/icon-terere.png" alt="tereré" />
-        TechReré
-      </span>
+    <footer
+      class="d-flex justify-content-center align-items-center bg-body-secondary"
+    >
+      <img src="assets/images/icon-terere.png" alt="tereré" id="icon-terere" />
+      <span class="fw-bold ms-2">TechReré</span>
     </footer>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript">
+      var graphs1 = {{ graph1JSON | safe}};
+      Plotly.plot("chart1", graphs1,{});
+    </script>
   </body>
 </html>
