@@ -33,6 +33,10 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 def home():
     return render_template('index.html')
 
+@app.route('/api')
+def home():
+    return render_template('api.html')
+
 @app.route('/predict',methods=['POST'])
 def predict():
     '''

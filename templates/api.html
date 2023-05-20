@@ -41,35 +41,35 @@
             id="logo-pantanal"
           />
         </a>
-        <a class="btn btn-outline-primary" type="button" href="/api">
-          Ir para o classificador
+        <a class="btn btn-outline-primary" type="button" href="/">
+          Ir para o comparador
         </a>
       </div>
     </nav>
     <div class="container">
       <h1>TechReré - Pantanal.dev</h1>
       <br />
-      <h4>
-        Predição de sentimentos de notícias e sua relação com preços de ações
-      </h4>
+      <h4>Predição de sentimentos de notícias</h4>
       <br />
       <!-- Main Input For Receiving Query to our ML -->
       <form action="{{ url_for('predict')}}" method="POST">
-        <div class="input-group mb-3 justify-content-center">
-          <select class="form-select" aria-label="Ação">
-            <option selected>Selecione a ação</option>
-            <option value="petrobras">Petrobrás</option>
-            <option value="itau">Itaú</option>
-          </select>
-          <div class="input-group-append">
-            <button class="btn btn-outline-info" type="submit">Buscar</button>
+        <div
+          class="mb-3 justify-content-center d-flex flex-column align-items-center"
+        >
+          <textarea
+            class="form-control mb-2"
+            rows="2"
+            placeholder="Insira aqui o texto da notícia"
+          ></textarea>
+          <div>
+            <button class="btn btn-outline-info mt-2" type="submit">
+              Classificar
+            </button>
           </div>
         </div>
       </form>
       <br />
       {{ prediction_text }}
-      <br />
-      <div id="chart1"></div>
     </div>
     <footer
       class="d-flex justify-content-center align-items-center bg-body-secondary"
@@ -85,9 +85,5 @@
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous"
     ></script>
-    <script type="text/javascript">
-      var graphs1 = {{ graph1JSON | safe}};
-      Plotly.plot("chart1", graphs1,{});
-    </script>
   </body>
 </html>

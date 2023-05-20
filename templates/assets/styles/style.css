@@ -11,7 +11,8 @@
   align-items: center;
 }
 
-.container select {
+.container select,
+.container textarea {
   border-color: #229679 !important;
   color: var(--preto) !important;
   max-width: 40%;
