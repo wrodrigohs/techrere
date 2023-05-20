@@ -36,6 +36,26 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased')
 def home():
     return render_template('index.html')
 
+@app.route('/predictnews',methods=['POST'])
+def predictNews():
+    '''
+    For rendering results on HTML GUI
+    '''
+    # news = request.form['news']
+    
+    # token=tokenizer(news, return_tensors='pt')
+    # out=model(input_ids=token['input_ids'])
+    # output = torch.argmax(out, dim=-1)[0].cpu().item()
+    # if output == 0:
+    #   resultado = 'negativo'
+    # elif output == 1:
+    #   resultado = 'positivo'
+    # else:
+    #   resultado = 'neutro'
+    
+    return render_template('index.html', 
+                          )
+
 @app.route('/predict',methods=['POST'])
 def predict():
     '''
@@ -60,8 +80,7 @@ def predict():
     
     # diff_date = datetime.now() - timedelta(days=7) 
     return render_template('index.html', 
-                          graph1JSON=graph1JSON,
-                          prediction_text='{}'.format(resultado))
+                          graph1JSON=graph1JSON)
 
 def get_news(stock):
     if (stock.lower() == 'itau'):
@@ -101,8 +120,8 @@ def plot(stock):
     df_stock = get_stock_info(stock)
 
     if (stock.lower() == 'itau'):
-      df_stock1 = df_stock.drop(df_stock.loc[df_stock['nome'] == 'ITUB4'].index())
-      df_stock1 = df_stock.drop(df_stock.loc[df_stock['nome'] == 'ITUB3'].index())
+      df_stock1 = df_stock.drop(df_stock.loc[df_stock['nome'] == 'ITUB4'].index)
+      df_stock2 = df_stock.drop(df_stock.loc[df_stock['nome'] == 'ITUB3'].index)
     else:
       df_stock1 = df_stock.drop(df_stock.loc[df_stock['nome'] == 'PETR4'].index)
       df_stock2 = df_stock.drop(df_stock.loc[df_stock['nome'] == 'PETR3'].index)
